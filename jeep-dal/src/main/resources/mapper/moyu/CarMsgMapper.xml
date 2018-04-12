@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.leno.jeep.dal.mapper.moyu.CarMsgMapper">
+    <resultMap id="BaseResultMap" type="com.leno.jeep.dal.model.CarMsgDO">
+        <id column="msg_id" jdbcType="BIGINT" property="msgId" />
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+        <result column="series_name" jdbcType="VARCHAR" property="seriesName" />
+        <result column="cell_phone_num" jdbcType="VARCHAR" property="cellPhoneNum" />
+        <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+    </resultMap>
+
+    <sql id="Query_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                <trim prefix="(" prefixOverrides="and" suffix=")">
+                    <foreach collection="criteria.criteria" item="criterion">
+                        <choose>
+                            <when test="criterion.noValue">
+                                and ${criterion.condition}
+                            </when>
+                            <when test="criterion.singleValue">
+                                and ${criterion.condition} #{criterion.value}
+                            </when>
+                            <when test="criterion.betweenValue">
+                                and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                            </when>
+                            <when test="criterion.listValue">
+                                and ${criterion.condition}
+                            <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                #{listItem}
+                            </foreach>
+                            </when>
+                        </choose>
+                    </foreach>
+                </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Query_Where_Clause">
+        <where>
+            <foreach collection="query.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List">
+        msg_id,gmt_create,gmt_modified,content,nick_name,series_name,cell_phone_num,is_delete
+    </sql>
+
+    <select id="selectByQuery" parameterType="com.leno.jeep.dal.query.CarMsgQuery" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+            from car_msg
+        <if test="_parameter != null">
+            <include refid="Query_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <include refid="MysqlDialectSuffix" />
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from car_msg where msg_id = #{msgId,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from car_msg where msg_id = #{msgId,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByQuery" parameterType="com.leno.jeep.dal.query.CarMsgQuery">
+        delete from car_msg
+        <if test="_parameter != null">
+            <include refid="Query_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insertSelective" parameterType="com.leno.jeep.dal.model.CarMsgDO">
+        <selectKey keyProperty="msgId" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into car_msg
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            gmt_create,gmt_modified,
+            <if test="content != null">
+                content,
+            </if>
+            <if test="nickName != null">
+                nick_name,
+            </if>
+            <if test="seriesName != null">
+                series_name,
+            </if>
+            <if test="cellPhoneNum != null">
+                cell_phone_num,
+            </if>
+            <if test="isDelete != null">
+                is_delete,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            now(),now(),
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="seriesName != null">
+                #{seriesName,jdbcType=VARCHAR},
+            </if>
+            <if test="cellPhoneNum != null">
+                #{cellPhoneNum,jdbcType=VARCHAR},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByQuery" parameterType="com.leno.jeep.dal.query.CarMsgQuery" resultType="java.lang.Integer">
+        select count(*) from car_msg
+        <if test="_parameter != null">
+            <include refid="Query_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByQuerySelective" parameterType="map">
+        update car_msg
+        <set>
+            gmt_modified=now(),
+            <if test="record.content != null">
+                content = #{record.content,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nickName != null">
+                nick_name = #{record.nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.seriesName != null">
+                series_name = #{record.seriesName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.cellPhoneNum != null">
+                cell_phone_num = #{record.cellPhoneNum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isDelete != null">
+                is_delete = #{record.isDelete,jdbcType=TINYINT},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Query_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByQuery" parameterType="map">
+        update car_msg set
+        content = #{record.content,jdbcType=VARCHAR},
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+        series_name = #{record.seriesName,jdbcType=VARCHAR},
+        cell_phone_num = #{record.cellPhoneNum,jdbcType=VARCHAR},
+        is_delete = #{record.isDelete,jdbcType=TINYINT},
+        gmt_modified = now()
+        <if test="_parameter != null">
+            <include refid="Update_By_Query_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.leno.jeep.dal.model.CarMsgDO">
+        update car_msg
+        <set>
+            gmt_modified=now(),
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                nick_name = #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="seriesName != null">
+                series_name = #{seriesName,jdbcType=VARCHAR},
+            </if>
+            <if test="cellPhoneNum != null">
+                cell_phone_num = #{cellPhoneNum,jdbcType=VARCHAR},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete,jdbcType=TINYINT},
+            </if>
+        </set>
+        where msg_id = #{msgId,jdbcType=BIGINT}
+    </update>
+
+    <sql id="MysqlDialectSuffix">
+        <if test="pageOffset &gt;= 0 and pageSize &gt; 0">
+            <![CDATA[ LIMIT #{pageOffset,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER} ]]>
+        </if>
+    </sql>
+
+</mapper>
