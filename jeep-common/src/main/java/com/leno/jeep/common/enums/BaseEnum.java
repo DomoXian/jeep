@@ -1,4 +1,4 @@
-package com.leno.jeep.common.base;
+package com.leno.jeep.common.enums;
 
 /**
  * <p>枚举类基类</p>

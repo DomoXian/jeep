@@ -1,7 +1,7 @@
 package com.leno.jeep.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.leno.jeep.common.base.Result;
+import com.leno.jeep.common.Result;
 import com.leno.jeep.dal.manager.CarMsgManager;
 import com.leno.jeep.dal.manager.JeepUserManager;
 import com.leno.jeep.dal.model.CarMsgDO;

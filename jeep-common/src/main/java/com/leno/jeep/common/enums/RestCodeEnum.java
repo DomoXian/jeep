@@ -1,6 +1,4 @@
-package com.leno.jeep.common;
-
-import com.leno.jeep.common.base.BaseEnum;
+package com.leno.jeep.common.enums;
 
 /**
  * <p>结果吗</p>

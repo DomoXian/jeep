@@ -5,11 +5,14 @@
 
     <groupId>com.leno</groupId>
     <artifactId>jeep</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${jeep.version}</version>
     <modules>
         <module>jeep-service</module>
         <module>jeep-mybatis</module>
         <module>jeep-dal</module>
+        <module>jeep-elastic</module>
+        <module>jeep-common</module>
+        <module>jeep-simple</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -28,6 +31,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <jeep.version>1.0.0-SNAPSHOT</jeep.version>
+        <elasticsearch.version>6.2.4</elasticsearch.version>
     </properties>
 
     <dependencyManagement>
@@ -37,9 +42,43 @@
             <dependency>
                 <groupId>com.leno</groupId>
                 <artifactId>jeep-dal</artifactId>
-                <version>${project.version}</version>
+                <version>${jeep.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.leno</groupId>
+                <artifactId>jeep-elastic</artifactId>
+                <version>${jeep.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.leno</groupId>
+                <artifactId>jeep-common</artifactId>
+                <version>${jeep.version}</version>
+            </dependency>
+            <!--内部module-->
+
+            <!--搜索-->
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>transport</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
+            <!--搜索-->
+
+            <!--网络-->
             <dependency>
                 <groupId>io.reactivex.rxjava2</groupId>
                 <artifactId>rxjava</artifactId>
@@ -75,6 +114,13 @@
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>1.1.9</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.squareup.retrofit2</groupId>
+                <artifactId>retrofit</artifactId>
+                <version>2.4.0</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

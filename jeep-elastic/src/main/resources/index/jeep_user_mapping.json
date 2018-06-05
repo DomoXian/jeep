@@ -1,0 +1,131 @@
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 1,
+      "number_of_replicas": 1
+    },
+    "analysis": {
+      "filter": {
+        "common_synonym": {
+          "type": "synonym",
+          "synonyms_path": "synonym.txt"
+        }
+      },
+      "analyzer": {
+        "custom": {
+          "type": "custom",
+          "tokenizer": "ik_max_word",
+          "filter": [
+            "common_synonym"
+          ]
+        },
+        "custom_query": {
+          "type": "custom",
+          "tokenizer": "ik_smart"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "doc": {
+      "properties": {
+        "@timestamp": {
+          "type": "date"
+        },
+        "@version": {
+          "type": "keyword"
+        },
+        "gmt_create": {
+          "type": "date"
+        },
+        "gmt_modified": {
+          "type": "date"
+        },
+        "publish_date": {
+          "type": "long"
+        },
+        "user_id": {
+          "type": "long"
+        },
+        "user_name": {
+          "type": "text",
+          "analyzer": "custom",
+          "fields": {
+            "raw": {
+              "type": "keyword",
+              "store": true
+            }
+          }
+        },
+        "province": {
+          "type": "text",
+          "analyzer": "custom",
+          "copy_to": "address",
+          "fields": {
+            "raw": {
+              "type": "keyword",
+              "store": true
+            }
+          }
+        },
+        "city": {
+          "type": "text",
+          "analyzer": "custom",
+          "copy_to": "address",
+          "fields": {
+            "raw": {
+              "type": "keyword",
+              "store": true
+            }
+          }
+        },
+        "address": {
+          "type": "text",
+          "analyzer": "custom",
+          "fields": {
+            "raw": {
+              "type": "keyword",
+              "store": true
+            }
+          }
+        },
+        "user_hair": {
+          "type": "text",
+          "analyzer": "custom",
+          "fields": {
+            "raw": {
+              "type": "keyword",
+              "store": true
+            }
+          }
+        },
+        "user_face": {
+          "type": "text",
+          "analyzer": "custom",
+          "fields": {
+            "raw": {
+              "type": "keyword",
+              "store": true
+            }
+          }
+        },
+        "status": {
+          "type": "short"
+        },
+        "is_delete": {
+          "type": "short"
+        },
+        "user_mobile": {
+          "type": "text",
+          "analyzer": "custom",
+          "fields": {
+            "raw": {
+              "type": "keyword",
+              "store": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

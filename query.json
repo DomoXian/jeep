@@ -1,0 +1,51 @@
+{
+  "from": 0,
+  "size": 20,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "multi_match": {
+            "query": "奥迪 宝马",
+            "fields": [
+              "msg_content^1.0"
+            ],
+            "type": "cross_fields",
+            "operator": "AND",
+            "analyzer": "custom_query",
+            "slop": 0,
+            "prefix_length": 0,
+            "max_expansions": 50,
+            "tie_breaker": 0.3,
+            "lenient": false,
+            "zero_terms_query": "NONE",
+            "boost": 1
+          }
+        }
+      ],
+      "disable_coord": false,
+      "adjust_pure_negative": true,
+      "boost": 1
+    }
+  },
+  "explain": false,
+  "function_score": {
+    "functions": [
+      {
+        "filter": {
+          "exists": {
+            "field": "phone_num"
+          }
+        }
+      },
+      {
+        "gauss": {
+          "publish_date":{
+            "scale":1,
+            "offset":1,
+          }
+        }
+      }
+    ]
+  }
+}

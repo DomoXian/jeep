@@ -1,7 +1,7 @@
-package com.leno.jeep.common.base;
+package com.leno.jeep.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.leno.jeep.common.RestCodeEnum;
+import com.leno.jeep.common.enums.RestCodeEnum;
 import lombok.Data;
 
 /**

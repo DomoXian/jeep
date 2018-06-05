@@ -11,7 +11,7 @@
     <parent>
         <groupId>com.leno</groupId>
         <artifactId>jeep</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>${jeep.version}</version>
     </parent>
     <dependencies>
         <dependency>

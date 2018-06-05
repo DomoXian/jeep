@@ -376,63 +376,273 @@ public class JeepUserQuery extends BaseQuery implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andUserSexEqualTo(Boolean value) {
+        public Criteria andUserSexEqualTo(Integer value) {
             addCriterion("user_sex =", value, "userSex");
             return (Criteria) this;
         }
 
-        public Criteria andUserSexNotEqualTo(Boolean value) {
+        public Criteria andUserSexNotEqualTo(Integer value) {
             addCriterion("user_sex <>", value, "userSex");
             return (Criteria) this;
         }
 
-        public Criteria andUserSexGreaterThan(Boolean value) {
+        public Criteria andUserSexGreaterThan(Integer value) {
             addCriterion("user_sex >", value, "userSex");
             return (Criteria) this;
         }
 
-        public Criteria andUserSexGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andUserSexGreaterThanOrEqualTo(Integer value) {
             addCriterion("user_sex >=", value, "userSex");
             return (Criteria) this;
         }
 
-        public Criteria andUserSexLessThan(Boolean value) {
+        public Criteria andUserSexLessThan(Integer value) {
             addCriterion("user_sex <", value, "userSex");
             return (Criteria) this;
         }
 
-        public Criteria andUserSexLessThanOrEqualTo(Boolean value) {
+        public Criteria andUserSexLessThanOrEqualTo(Integer value) {
             addCriterion("user_sex <=", value, "userSex");
             return (Criteria) this;
         }
 
-        public Criteria andUserSexLike(Boolean value) {
+        public Criteria andUserSexLike(Integer value) {
             addCriterion("user_sex like", value, "userSex");
             return (Criteria) this;
         }
 
-        public Criteria andUserSexNotLike(Boolean value) {
+        public Criteria andUserSexNotLike(Integer value) {
             addCriterion("user_sex not like", value, "userSex");
             return (Criteria) this;
         }
 
-        public Criteria andUserSexIn(List<Boolean> values) {
+        public Criteria andUserSexIn(List<Integer> values) {
             addCriterion("user_sex in", values, "userSex");
             return (Criteria) this;
         }
 
-        public Criteria andUserSexNotIn(List<Boolean> values) {
+        public Criteria andUserSexNotIn(List<Integer> values) {
             addCriterion("user_sex not in", values, "userSex");
             return (Criteria) this;
         }
 
-        public Criteria andUserSexBetween(Boolean value1, Boolean value2) {
+        public Criteria andUserSexBetween(Integer value1, Integer value2) {
             addCriterion("user_sex between", value1, value2, "userSex");
             return (Criteria) this;
         }
 
-        public Criteria andUserSexNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andUserSexNotBetween(Integer value1, Integer value2) {
             addCriterion("user_sex not between", value1, value2, "userSex");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserHairIsNull() {
+            addCriterion("user_hair is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserHairIsNotNull() {
+            addCriterion("user_hair is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserHairEqualTo(String value) {
+            addCriterion("user_hair =", value, "userHair");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserHairNotEqualTo(String value) {
+            addCriterion("user_hair <>", value, "userHair");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserHairGreaterThan(String value) {
+            addCriterion("user_hair >", value, "userHair");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserHairGreaterThanOrEqualTo(String value) {
+            addCriterion("user_hair >=", value, "userHair");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserHairLessThan(String value) {
+            addCriterion("user_hair <", value, "userHair");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserHairLessThanOrEqualTo(String value) {
+            addCriterion("user_hair <=", value, "userHair");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserHairLike(String value) {
+            addCriterion("user_hair like", value, "userHair");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserHairNotLike(String value) {
+            addCriterion("user_hair not like", value, "userHair");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserHairIn(List<String> values) {
+            addCriterion("user_hair in", values, "userHair");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserHairNotIn(List<String> values) {
+            addCriterion("user_hair not in", values, "userHair");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserHairBetween(String value1, String value2) {
+            addCriterion("user_hair between", value1, value2, "userHair");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserHairNotBetween(String value1, String value2) {
+            addCriterion("user_hair not between", value1, value2, "userHair");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserFaceIsNull() {
+            addCriterion("user_face is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserFaceIsNotNull() {
+            addCriterion("user_face is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserFaceEqualTo(String value) {
+            addCriterion("user_face =", value, "userFace");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserFaceNotEqualTo(String value) {
+            addCriterion("user_face <>", value, "userFace");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserFaceGreaterThan(String value) {
+            addCriterion("user_face >", value, "userFace");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserFaceGreaterThanOrEqualTo(String value) {
+            addCriterion("user_face >=", value, "userFace");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserFaceLessThan(String value) {
+            addCriterion("user_face <", value, "userFace");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserFaceLessThanOrEqualTo(String value) {
+            addCriterion("user_face <=", value, "userFace");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserFaceLike(String value) {
+            addCriterion("user_face like", value, "userFace");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserFaceNotLike(String value) {
+            addCriterion("user_face not like", value, "userFace");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserFaceIn(List<String> values) {
+            addCriterion("user_face in", values, "userFace");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserFaceNotIn(List<String> values) {
+            addCriterion("user_face not in", values, "userFace");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserFaceBetween(String value1, String value2) {
+            addCriterion("user_face between", value1, value2, "userFace");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserFaceNotBetween(String value1, String value2) {
+            addCriterion("user_face not between", value1, value2, "userFace");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserLegIsNull() {
+            addCriterion("user_leg is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserLegIsNotNull() {
+            addCriterion("user_leg is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserLegEqualTo(String value) {
+            addCriterion("user_leg =", value, "userLeg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserLegNotEqualTo(String value) {
+            addCriterion("user_leg <>", value, "userLeg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserLegGreaterThan(String value) {
+            addCriterion("user_leg >", value, "userLeg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserLegGreaterThanOrEqualTo(String value) {
+            addCriterion("user_leg >=", value, "userLeg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserLegLessThan(String value) {
+            addCriterion("user_leg <", value, "userLeg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserLegLessThanOrEqualTo(String value) {
+            addCriterion("user_leg <=", value, "userLeg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserLegLike(String value) {
+            addCriterion("user_leg like", value, "userLeg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserLegNotLike(String value) {
+            addCriterion("user_leg not like", value, "userLeg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserLegIn(List<String> values) {
+            addCriterion("user_leg in", values, "userLeg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserLegNotIn(List<String> values) {
+            addCriterion("user_leg not in", values, "userLeg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserLegBetween(String value1, String value2) {
+            addCriterion("user_leg between", value1, value2, "userLeg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserLegNotBetween(String value1, String value2) {
+            addCriterion("user_leg not between", value1, value2, "userLeg");
             return (Criteria) this;
         }
 

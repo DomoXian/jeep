@@ -8,10 +8,12 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+#搜索配置
   data:
     elasticsearch:
       cluster-name: elasticsearch_xianguo
       cluster-nodes: localhost
+# 多数据源配置
   datasource:
       druid:
       # 测试环境没有主库和备库之分
@@ -25,6 +27,9 @@ spring:
           username: root
           password: alixian
           driver-class-name: com.mysql.jdbc.Driver
+regCenter:
+  serverList: localhost:2181
+  namespace: elastic-job-jeep
 #日志配置
 logging:
   config: classpath:jeep-logback.xml

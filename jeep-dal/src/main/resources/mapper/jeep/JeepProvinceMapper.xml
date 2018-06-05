@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.leno.jeep.dal.mapper.jeep.JeepProvinceMapper">
+    <resultMap id="BaseResultMap" type="com.leno.jeep.dal.model.JeepProvinceDO">
+        <id column="province_id" jdbcType="BIGINT" property="provinceId" />
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+        <result column="province_name" jdbcType="VARCHAR" property="provinceName" />
+        <result column="province_short_name" jdbcType="VARCHAR" property="provinceShortName" />
+        <result column="province_sort" jdbcType="INTEGER" property="provinceSort" />
+        <result column="province_index" jdbcType="VARCHAR" property="provinceIndex" />
+        <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+        <result column="status" jdbcType="TINYINT" property="status" />
+    </resultMap>
+
+    <sql id="Query_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                <trim prefix="(" prefixOverrides="and" suffix=")">
+                    <foreach collection="criteria.criteria" item="criterion">
+                        <choose>
+                            <when test="criterion.noValue">
+                                and ${criterion.condition}
+                            </when>
+                            <when test="criterion.singleValue">
+                                and ${criterion.condition} #{criterion.value}
+                            </when>
+                            <when test="criterion.betweenValue">
+                                and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                            </when>
+                            <when test="criterion.listValue">
+                                and ${criterion.condition}
+                            <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                #{listItem}
+                            </foreach>
+                            </when>
+                        </choose>
+                    </foreach>
+                </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Query_Where_Clause">
+        <where>
+            <foreach collection="query.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List">
+        province_id,gmt_create,gmt_modified,province_name,province_short_name,province_sort,province_index,remarks,status
+    </sql>
+
+    <select id="selectByQuery" parameterType="com.leno.jeep.dal.query.JeepProvinceQuery" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+            from jeep_province
+        <if test="_parameter != null">
+            <include refid="Query_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <include refid="MysqlDialectSuffix" />
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from jeep_province where province_id = #{provinceId,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from jeep_province where province_id = #{provinceId,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByQuery" parameterType="com.leno.jeep.dal.query.JeepProvinceQuery">
+        delete from jeep_province
+        <if test="_parameter != null">
+            <include refid="Query_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insertSelective" parameterType="com.leno.jeep.dal.model.JeepProvinceDO">
+        <selectKey keyProperty="provinceId" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into jeep_province
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            gmt_create,gmt_modified,
+            <if test="provinceName != null">
+                province_name,
+            </if>
+            <if test="provinceShortName != null">
+                province_short_name,
+            </if>
+            <if test="provinceSort != null">
+                province_sort,
+            </if>
+            <if test="provinceIndex != null">
+                province_index,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            now(),now(),
+            <if test="provinceName != null">
+                #{provinceName,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceShortName != null">
+                #{provinceShortName,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceSort != null">
+                #{provinceSort,jdbcType=INTEGER},
+            </if>
+            <if test="provinceIndex != null">
+                #{provinceIndex,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByQuery" parameterType="com.leno.jeep.dal.query.JeepProvinceQuery" resultType="java.lang.Integer">
+        select count(*) from jeep_province
+        <if test="_parameter != null">
+            <include refid="Query_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByQuerySelective" parameterType="map">
+        update jeep_province
+        <set>
+            gmt_modified=now(),
+            <if test="record.provinceName != null">
+                province_name = #{record.provinceName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.provinceShortName != null">
+                province_short_name = #{record.provinceShortName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.provinceSort != null">
+                province_sort = #{record.provinceSort,jdbcType=INTEGER},
+            </if>
+            <if test="record.provinceIndex != null">
+                province_index = #{record.provinceIndex,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remarks != null">
+                remarks = #{record.remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=TINYINT},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Query_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByQuery" parameterType="map">
+        update jeep_province set
+        province_name = #{record.provinceName,jdbcType=VARCHAR},
+        province_short_name = #{record.provinceShortName,jdbcType=VARCHAR},
+        province_sort = #{record.provinceSort,jdbcType=INTEGER},
+        province_index = #{record.provinceIndex,jdbcType=VARCHAR},
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+        status = #{record.status,jdbcType=TINYINT},
+        gmt_modified = now()
+        <if test="_parameter != null">
+            <include refid="Update_By_Query_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.leno.jeep.dal.model.JeepProvinceDO">
+        update jeep_province
+        <set>
+            gmt_modified=now(),
+            <if test="provinceName != null">
+                province_name = #{provinceName,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceShortName != null">
+                province_short_name = #{provinceShortName,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceSort != null">
+                province_sort = #{provinceSort,jdbcType=INTEGER},
+            </if>
+            <if test="provinceIndex != null">
+                province_index = #{provinceIndex,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+        </set>
+        where province_id = #{provinceId,jdbcType=BIGINT}
+    </update>
+
+    <sql id="MysqlDialectSuffix">
+        <if test="pageOffset &gt;= 0 and pageSize &gt; 0">
+            <![CDATA[ LIMIT #{pageOffset,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER} ]]>
+        </if>
+    </sql>
+
+</mapper>

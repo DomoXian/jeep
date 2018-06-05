@@ -8,6 +8,9 @@
         <result column="user_name" jdbcType="VARCHAR" property="userName" />
         <result column="user_age" jdbcType="TINYINT" property="userAge" />
         <result column="user_sex" jdbcType="TINYINT" property="userSex" />
+        <result column="user_hair" jdbcType="VARCHAR" property="userHair" />
+        <result column="user_face" jdbcType="VARCHAR" property="userFace" />
+        <result column="user_leg" jdbcType="VARCHAR" property="userLeg" />
     </resultMap>
 
     <sql id="Query_Where_Clause">
@@ -71,7 +74,7 @@
     </sql>
 
     <sql id="Base_Column_List">
-        user_id,gmt_create,gmt_modified,user_name,user_age,user_sex
+        user_id,gmt_create,gmt_modified,user_name,user_age,user_sex,user_hair,user_face,user_leg
     </sql>
 
     <select id="selectByQuery" parameterType="com.leno.jeep.dal.query.JeepUserQuery" resultMap="BaseResultMap">
@@ -121,6 +124,15 @@
             <if test="userSex != null">
                 user_sex,
             </if>
+            <if test="userHair != null">
+                user_hair,
+            </if>
+            <if test="userFace != null">
+                user_face,
+            </if>
+            <if test="userLeg != null">
+                user_leg,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             now(),now(),
@@ -132,6 +144,15 @@
             </if>
             <if test="userSex != null">
                 #{userSex,jdbcType=TINYINT},
+            </if>
+            <if test="userHair != null">
+                #{userHair,jdbcType=VARCHAR},
+            </if>
+            <if test="userFace != null">
+                #{userFace,jdbcType=VARCHAR},
+            </if>
+            <if test="userLeg != null">
+                #{userLeg,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -156,6 +177,15 @@
             <if test="record.userSex != null">
                 user_sex = #{record.userSex,jdbcType=TINYINT},
             </if>
+            <if test="record.userHair != null">
+                user_hair = #{record.userHair,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userFace != null">
+                user_face = #{record.userFace,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userLeg != null">
+                user_leg = #{record.userLeg,jdbcType=VARCHAR},
+            </if>
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Query_Where_Clause" />
@@ -167,6 +197,9 @@
         user_name = #{record.userName,jdbcType=VARCHAR},
         user_age = #{record.userAge,jdbcType=TINYINT},
         user_sex = #{record.userSex,jdbcType=TINYINT},
+        user_hair = #{record.userHair,jdbcType=VARCHAR},
+        user_face = #{record.userFace,jdbcType=VARCHAR},
+        user_leg = #{record.userLeg,jdbcType=VARCHAR},
         gmt_modified = now()
         <if test="_parameter != null">
             <include refid="Update_By_Query_Where_Clause" />
@@ -185,6 +218,15 @@
             </if>
             <if test="userSex != null">
                 user_sex = #{userSex,jdbcType=TINYINT},
+            </if>
+            <if test="userHair != null">
+                user_hair = #{userHair,jdbcType=VARCHAR},
+            </if>
+            <if test="userFace != null">
+                user_face = #{userFace,jdbcType=VARCHAR},
+            </if>
+            <if test="userLeg != null">
+                user_leg = #{userLeg,jdbcType=VARCHAR},
             </if>
         </set>
         where user_id = #{userId,jdbcType=BIGINT}

@@ -1,8 +1,9 @@
 package com.leno.jeep.dal.model;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 @Data
 public class JeepUserDO implements Serializable {
@@ -31,7 +32,25 @@ public class JeepUserDO implements Serializable {
      * 用户姓名 0 男 1 女 2 人妖
      * jeep_user.user_sex
      */
-    private Boolean userSex;
+    private Integer userSex;
+
+    /**
+     * 头发
+     * jeep_user.user_hair
+     */
+    private String userHair;
+
+    /**
+     * 脸型
+     * jeep_user.user_face
+     */
+    private String userFace;
+
+    /**
+     * 腿
+     * jeep_user.user_leg
+     */
+    private String userLeg;
 
     /**
      * 

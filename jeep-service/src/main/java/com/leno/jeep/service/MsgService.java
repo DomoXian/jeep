@@ -1,6 +1,6 @@
 package com.leno.jeep.service;
 
-import com.leno.jeep.common.base.Result;
+import com.leno.jeep.common.Result;
 import com.leno.jeep.dal.model.CarMsgDO;
 
 import java.util.List;

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.leno.jeep.dal.mapper.jeep.JeepCityMapper">
+    <resultMap id="BaseResultMap" type="com.leno.jeep.dal.model.JeepCityDO">
+        <id column="city_id" jdbcType="BIGINT" property="cityId" />
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+        <result column="city_name" jdbcType="VARCHAR" property="cityName" />
+        <result column="city_short_name" jdbcType="VARCHAR" property="cityShortName" />
+        <result column="city_sort" jdbcType="INTEGER" property="citySort" />
+        <result column="prov_id" jdbcType="BIGINT" property="provId" />
+        <result column="city_index" jdbcType="VARCHAR" property="cityIndex" />
+        <result column="status" jdbcType="TINYINT" property="status" />
+        <result column="longitude" jdbcType="DECIMAL" property="longitude" />
+        <result column="latitude" jdbcType="DECIMAL" property="latitude" />
+    </resultMap>
+
+    <sql id="Query_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                <trim prefix="(" prefixOverrides="and" suffix=")">
+                    <foreach collection="criteria.criteria" item="criterion">
+                        <choose>
+                            <when test="criterion.noValue">
+                                and ${criterion.condition}
+                            </when>
+                            <when test="criterion.singleValue">
+                                and ${criterion.condition} #{criterion.value}
+                            </when>
+                            <when test="criterion.betweenValue">
+                                and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                            </when>
+                            <when test="criterion.listValue">
+                                and ${criterion.condition}
+                            <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                #{listItem}
+                            </foreach>
+                            </when>
+                        </choose>
+                    </foreach>
+                </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Query_Where_Clause">
+        <where>
+            <foreach collection="query.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List">
+        city_id,gmt_create,gmt_modified,city_name,city_short_name,city_sort,prov_id,city_index,status,longitude,latitude
+    </sql>
+
+    <select id="selectByQuery" parameterType="com.leno.jeep.dal.query.JeepCityQuery" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+            from jeep_city
+        <if test="_parameter != null">
+            <include refid="Query_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <include refid="MysqlDialectSuffix" />
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from jeep_city where city_id = #{cityId,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from jeep_city where city_id = #{cityId,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByQuery" parameterType="com.leno.jeep.dal.query.JeepCityQuery">
+        delete from jeep_city
+        <if test="_parameter != null">
+            <include refid="Query_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insertSelective" parameterType="com.leno.jeep.dal.model.JeepCityDO">
+        <selectKey keyProperty="cityId" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into jeep_city
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            gmt_create,gmt_modified,
+            <if test="cityName != null">
+                city_name,
+            </if>
+            <if test="cityShortName != null">
+                city_short_name,
+            </if>
+            <if test="citySort != null">
+                city_sort,
+            </if>
+            <if test="provId != null">
+                prov_id,
+            </if>
+            <if test="cityIndex != null">
+                city_index,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="longitude != null">
+                longitude,
+            </if>
+            <if test="latitude != null">
+                latitude,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            now(),now(),
+            <if test="cityName != null">
+                #{cityName,jdbcType=VARCHAR},
+            </if>
+            <if test="cityShortName != null">
+                #{cityShortName,jdbcType=VARCHAR},
+            </if>
+            <if test="citySort != null">
+                #{citySort,jdbcType=INTEGER},
+            </if>
+            <if test="provId != null">
+                #{provId,jdbcType=BIGINT},
+            </if>
+            <if test="cityIndex != null">
+                #{cityIndex,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="longitude != null">
+                #{longitude,jdbcType=DECIMAL},
+            </if>
+            <if test="latitude != null">
+                #{latitude,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByQuery" parameterType="com.leno.jeep.dal.query.JeepCityQuery" resultType="java.lang.Integer">
+        select count(*) from jeep_city
+        <if test="_parameter != null">
+            <include refid="Query_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByQuerySelective" parameterType="map">
+        update jeep_city
+        <set>
+            gmt_modified=now(),
+            <if test="record.cityName != null">
+                city_name = #{record.cityName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.cityShortName != null">
+                city_short_name = #{record.cityShortName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.citySort != null">
+                city_sort = #{record.citySort,jdbcType=INTEGER},
+            </if>
+            <if test="record.provId != null">
+                prov_id = #{record.provId,jdbcType=BIGINT},
+            </if>
+            <if test="record.cityIndex != null">
+                city_index = #{record.cityIndex,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=TINYINT},
+            </if>
+            <if test="record.longitude != null">
+                longitude = #{record.longitude,jdbcType=DECIMAL},
+            </if>
+            <if test="record.latitude != null">
+                latitude = #{record.latitude,jdbcType=DECIMAL},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Query_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByQuery" parameterType="map">
+        update jeep_city set
+        city_name = #{record.cityName,jdbcType=VARCHAR},
+        city_short_name = #{record.cityShortName,jdbcType=VARCHAR},
+        city_sort = #{record.citySort,jdbcType=INTEGER},
+        prov_id = #{record.provId,jdbcType=BIGINT},
+        city_index = #{record.cityIndex,jdbcType=VARCHAR},
+        status = #{record.status,jdbcType=TINYINT},
+        longitude = #{record.longitude,jdbcType=DECIMAL},
+        latitude = #{record.latitude,jdbcType=DECIMAL},
+        gmt_modified = now()
+        <if test="_parameter != null">
+            <include refid="Update_By_Query_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.leno.jeep.dal.model.JeepCityDO">
+        update jeep_city
+        <set>
+            gmt_modified=now(),
+            <if test="cityName != null">
+                city_name = #{cityName,jdbcType=VARCHAR},
+            </if>
+            <if test="cityShortName != null">
+                city_short_name = #{cityShortName,jdbcType=VARCHAR},
+            </if>
+            <if test="citySort != null">
+                city_sort = #{citySort,jdbcType=INTEGER},
+            </if>
+            <if test="provId != null">
+                prov_id = #{provId,jdbcType=BIGINT},
+            </if>
+            <if test="cityIndex != null">
+                city_index = #{cityIndex,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="longitude != null">
+                longitude = #{longitude,jdbcType=DECIMAL},
+            </if>
+            <if test="latitude != null">
+                latitude = #{latitude,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where city_id = #{cityId,jdbcType=BIGINT}
+    </update>
+
+    <sql id="MysqlDialectSuffix">
+        <if test="pageOffset &gt;= 0 and pageSize &gt; 0">
+            <![CDATA[ LIMIT #{pageOffset,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER} ]]>
+        </if>
+    </sql>
+
+</mapper>
