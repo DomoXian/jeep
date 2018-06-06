@@ -1,6 +1,7 @@
 package com.leno.jeep.controller;
 
 import com.leno.jeep.common.Result;
+import com.leno.jeep.common.utils.AreaHelper;
 import com.leno.jeep.common.utils.ConstantUtil;
 import com.leno.jeep.common.utils.ThreadPoolHelper;
 import com.leno.jeep.dal.manager.JeepUserManager;
@@ -85,5 +86,15 @@ public class TestController {
     @GetMapping("/test")
     public Result test(String name,String age){
         return Result.getSuccessResult(name+age);
+    }
+
+    @GetMapping("/getCity")
+    public Result getCity(String name){
+        return Result.getSuccessResult(AreaHelper.getCity(name));
+    }
+
+    @GetMapping("/getProvince")
+    public Result getProvince(String name){
+        return Result.getSuccessResult(AreaHelper.getProvince(name));
     }
 }

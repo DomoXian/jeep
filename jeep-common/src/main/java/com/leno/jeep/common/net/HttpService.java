@@ -1,9 +1,12 @@
 package com.leno.jeep.common.net;
 
 
+import com.leno.jeep.common.utils.AreaHelper;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+
+import java.util.List;
 
 /**
  * <p>网络</p>
@@ -17,8 +20,8 @@ public interface HttpService {
     Call<String> webCrawler(@Path("id") Long id);
 
     @GET("https://raw.githubusercontent.com/LenoXian/common-data/master/city.json")
-    Call<String> getCityInfo();
+    Call<List<AreaHelper.CityItem>> getCityInfo();
 
     @GET("https://raw.githubusercontent.com/LenoXian/common-data/master/province.json")
-    Call<String> getProvinceInfo();
+    Call<List<AreaHelper.ProvinceItem>> getProvinceInfo();
 }

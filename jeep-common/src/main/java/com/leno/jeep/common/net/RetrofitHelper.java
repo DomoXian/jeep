@@ -95,12 +95,6 @@ public class RetrofitHelper {
         return null;
     }
 
-    public static void main(String[] args) {
-        HttpService httpService = invoke(HttpService.class);
-        String result = getExecuteBody(httpService.getCityInfo());
-
-        System.out.println(result);
-    }
 
 
 }
